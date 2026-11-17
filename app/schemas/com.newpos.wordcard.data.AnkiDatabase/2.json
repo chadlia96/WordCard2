@@ -1,0 +1,152 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "4dd4d914cb7cdcff7e601a6f1a36794a",
+    "entities": [
+      {
+        "tableName": "anki_cards",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `book_id` TEXT NOT NULL, `book_name` TEXT NOT NULL, `source_note_guid` TEXT NOT NULL, `word` TEXT NOT NULL, `plain_word` TEXT NOT NULL, `translation` TEXT NOT NULL, `word_audio_path` TEXT, `examples_json` TEXT NOT NULL, `source_index` INTEGER, `ipm` REAL, `dispersion` REAL, `german` TEXT NOT NULL, `verb_forms_json` TEXT NOT NULL, `etymology` TEXT NOT NULL, `tags_json` TEXT NOT NULL, `last_flipped_at` INTEGER DEFAULT NULL, `proficiency` INTEGER NOT NULL DEFAULT 0)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bookId",
+            "columnName": "book_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bookName",
+            "columnName": "book_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sourceNoteGuid",
+            "columnName": "source_note_guid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "word",
+            "columnName": "word",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plainWord",
+            "columnName": "plain_word",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "translation",
+            "columnName": "translation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wordAudioPath",
+            "columnName": "word_audio_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "examples",
+            "columnName": "examples_json",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sourceIndex",
+            "columnName": "source_index",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "ipm",
+            "columnName": "ipm",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "dispersion",
+            "columnName": "dispersion",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "german",
+            "columnName": "german",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "verbForms",
+            "columnName": "verb_forms_json",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "etymology",
+            "columnName": "etymology",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tags",
+            "columnName": "tags_json",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastFlippedAt",
+            "columnName": "last_flipped_at",
+            "affinity": "INTEGER",
+            "defaultValue": "NULL"
+          },
+          {
+            "fieldPath": "proficiency",
+            "columnName": "proficiency",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_anki_cards_book_id_source_note_guid",
+            "unique": true,
+            "columnNames": [
+              "book_id",
+              "source_note_guid"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_anki_cards_book_id_source_note_guid` ON `${TABLE_NAME}` (`book_id`, `source_note_guid`)"
+          },
+          {
+            "name": "index_anki_cards_book_id_source_index",
+            "unique": false,
+            "columnNames": [
+              "book_id",
+              "source_index"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_anki_cards_book_id_source_index` ON `${TABLE_NAME}` (`book_id`, `source_index`)"
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4dd4d914cb7cdcff7e601a6f1a36794a')"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">WordCard</string>
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+    <string name="nav_alphabet">字母表</string>
+    <string name="nav_word_cards">单词卡</string>
+    <string name="nav_basic_knowledge">基础知识</string>
+    <string name="deepseek_api_key">DeepSeek API Key</string>
+    <string name="save_api_key">保存</string>
+    <string name="api_key_hint">输入密钥，留空并保存可清除</string>
+    <string name="word_card_previous">返回上一个</string>
+    <string name="word_card_again">再学一遍</string>
+    <string name="word_card_learned">学懂了</string>
+    <string name="speak_word">朗读单词</string>
+    <string name="speak_sentences">朗读例句</string>
+    <string name="sentence_explanation_failed">例句讲解失败，请重试</string>
+    <string name="playback_speed">播放语速</string>
+    <string name="playback_speed_value">播放语速 %1$.1f×</string>
+    <string name="speak_letter">朗读字母</string>
+    <string name="speak_first_word">朗读第一个单词</string>
+    <string name="speak_second_word">朗读第二个单词</string>
+    <string name="speak_third_word">朗读第三个单词</string>
+</resources>

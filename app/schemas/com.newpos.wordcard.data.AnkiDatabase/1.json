@@ -1,0 +1,407 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "15fddbc62061da7bc5ac99aaf68d29b8",
+    "entities": [
+      {
+        "tableName": "anki_imports",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `sha256` TEXT NOT NULL, `name` TEXT NOT NULL, `imported_at` INTEGER NOT NULL, `directory` TEXT NOT NULL, `note_count` INTEGER NOT NULL, `card_count` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sha256",
+            "columnName": "sha256",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importedAt",
+            "columnName": "imported_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "directory",
+            "columnName": "directory",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "noteCount",
+            "columnName": "note_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cardCount",
+            "columnName": "card_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_anki_imports_sha256",
+            "unique": true,
+            "columnNames": [
+              "sha256"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_anki_imports_sha256` ON `${TABLE_NAME}` (`sha256`)"
+          }
+        ]
+      },
+      {
+        "tableName": "anki_decks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`import_id` TEXT NOT NULL, `id` INTEGER NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`import_id`, `id`), FOREIGN KEY(`import_id`) REFERENCES `anki_imports`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "importId",
+            "columnName": "import_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "import_id",
+            "id"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "anki_imports",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "import_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "anki_note_types",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`import_id` TEXT NOT NULL, `id` INTEGER NOT NULL, `name` TEXT NOT NULL, `definition_json` TEXT NOT NULL, PRIMARY KEY(`import_id`, `id`), FOREIGN KEY(`import_id`) REFERENCES `anki_imports`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "importId",
+            "columnName": "import_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "definitionJson",
+            "columnName": "definition_json",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "import_id",
+            "id"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "anki_imports",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "import_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "anki_notes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`import_id` TEXT NOT NULL, `id` INTEGER NOT NULL, `guid` TEXT NOT NULL, `note_type_id` INTEGER NOT NULL, `fields_json` TEXT NOT NULL, `tags_json` TEXT NOT NULL, PRIMARY KEY(`import_id`, `id`), FOREIGN KEY(`import_id`) REFERENCES `anki_imports`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`import_id`, `note_type_id`) REFERENCES `anki_note_types`(`import_id`, `id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "importId",
+            "columnName": "import_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "guid",
+            "columnName": "guid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "noteTypeId",
+            "columnName": "note_type_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fieldsJson",
+            "columnName": "fields_json",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tagsJson",
+            "columnName": "tags_json",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "import_id",
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_anki_notes_import_id_note_type_id",
+            "unique": false,
+            "columnNames": [
+              "import_id",
+              "note_type_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_anki_notes_import_id_note_type_id` ON `${TABLE_NAME}` (`import_id`, `note_type_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "anki_imports",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "import_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "anki_note_types",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "import_id",
+              "note_type_id"
+            ],
+            "referencedColumns": [
+              "import_id",
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "anki_cards",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`import_id` TEXT NOT NULL, `id` INTEGER NOT NULL, `note_id` INTEGER NOT NULL, `deck_id` INTEGER NOT NULL, `ordinal` INTEGER NOT NULL, PRIMARY KEY(`import_id`, `id`), FOREIGN KEY(`import_id`) REFERENCES `anki_imports`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`import_id`, `note_id`) REFERENCES `anki_notes`(`import_id`, `id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`import_id`, `deck_id`) REFERENCES `anki_decks`(`import_id`, `id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "importId",
+            "columnName": "import_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "noteId",
+            "columnName": "note_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deckId",
+            "columnName": "deck_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ordinal",
+            "columnName": "ordinal",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "import_id",
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_anki_cards_import_id_note_id",
+            "unique": false,
+            "columnNames": [
+              "import_id",
+              "note_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_anki_cards_import_id_note_id` ON `${TABLE_NAME}` (`import_id`, `note_id`)"
+          },
+          {
+            "name": "index_anki_cards_import_id_deck_id",
+            "unique": false,
+            "columnNames": [
+              "import_id",
+              "deck_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_anki_cards_import_id_deck_id` ON `${TABLE_NAME}` (`import_id`, `deck_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "anki_imports",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "import_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "anki_notes",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "import_id",
+              "note_id"
+            ],
+            "referencedColumns": [
+              "import_id",
+              "id"
+            ]
+          },
+          {
+            "table": "anki_decks",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "import_id",
+              "deck_id"
+            ],
+            "referencedColumns": [
+              "import_id",
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "anki_media",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`import_id` TEXT NOT NULL, `name` TEXT NOT NULL, `relative_path` TEXT NOT NULL, PRIMARY KEY(`import_id`, `name`), FOREIGN KEY(`import_id`) REFERENCES `anki_imports`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "importId",
+            "columnName": "import_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "relativePath",
+            "columnName": "relative_path",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "import_id",
+            "name"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "anki_imports",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "import_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '15fddbc62061da7bc5ac99aaf68d29b8')"
+    ]
+  }
+}

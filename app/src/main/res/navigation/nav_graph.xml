@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_alphabet">
+
+    <fragment
+        android:id="@+id/nav_alphabet"
+        android:name="com.newpos.wordcard.HomeFragment"
+        android:label="@string/nav_alphabet"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_word_cards"
+        android:name="com.newpos.wordcard.WordCardsFragment"
+        android:label="@string/nav_word_cards"
+        tools:layout="@layout/fragment_word_cards" />
+
+    <fragment
+        android:id="@+id/nav_basic_knowledge"
+        android:name="com.newpos.wordcard.BasicKnowledgeListFragment"
+        android:label="@string/markdown_notes"
+        tools:layout="@layout/fragment_basic_knowledge_list" />
+
+    <fragment
+        android:id="@+id/nav_basic_knowledge_detail"
+        android:name="com.newpos.wordcard.BasicKnowledgeFragment"
+        android:label="@string/nav_basic_knowledge"
+        tools:layout="@layout/fragment_basic_knowledge" />
+
+</navigation>

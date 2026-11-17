@@ -1,0 +1,8 @@
+<resources>
+    <string name="markdown_notes">笔记列表</string>
+    <string name="markdown_untitled">未命名笔记</string>
+    <string name="edit_markdown">编辑 Markdown</string>
+    <string name="confirm_markdown_edit">OK</string>
+    <string name="markdown_save_failed">保存失败，请重试</string>
+    <string name="markdown_load_failed">笔记加载失败</string>
+</resources>

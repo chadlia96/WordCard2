@@ -1,0 +1,222 @@
+package com.newpos.wordcard
+
+internal data class LetterExample(val word: String, val meaning: String, val sound: String)
+
+internal class Letter(val name: String, vararg val examples: LetterExample)
+
+/** 例词中的重音用 ́ 标出；字母 ё 本身通常表示重读。sound 使用近似 IPA 和简短提示。 */
+internal val letterWords = mapOf(
+    'А' to Letter("а",
+        LetterExample("ма́ма", "妈妈", "重读 а [a]"),
+        LetterExample("са́д", "花园", "重读 а [a]"),
+        LetterExample("ра́дуга", "彩虹", "重读 а [a]；词尾非重读 а 弱化"),
+        LetterExample("вода́", "水", "词尾 а 重读 [a]")
+    ),
+    'Б' to Letter("бэ",
+        LetterExample("ба́бушка", "奶奶；外婆", "[b]"),
+        LetterExample("би́лет", "票", "[bʲ]，и 前软化"),
+        LetterExample("зу́б", "牙齿", "词尾 б 清化为 [p]"),
+        LetterExample("футбо́л", "足球", "[b]；辅音连缀中仍浊音")
+    ),
+    'В' to Letter("вэ",
+        LetterExample("ве́тер", "风", "[v]"),
+        LetterExample("ви́лка", "叉子", "[vʲ]，и 前软化"),
+        LetterExample("тра́вка", "小草", "к 前 в 清化为 [f]"),
+        LetterExample("кро́вь", "血", "词尾 в 清化为 [f]")
+    ),
+    'Г' to Letter("гэ",
+        LetterExample("гора́", "山", "[g]"),
+        LetterExample("ги́тара", "吉他", "[gʲ]，и 前软化"),
+        LetterExample("но́гти", "指甲", "т 前 г 清化为 [k]"),
+        LetterExample("сне́г", "雪", "词尾 г 清化为 [k]"),
+        LetterExample("его́", "他的；他（宾格）", "特殊读法：г 读 [v]")
+    ),
+    'Д' to Letter("дэ",
+        LetterExample("до́м", "房子", "[d]"),
+        LetterExample("де́ти", "孩子们", "[dʲ]，е 前软化"),
+        LetterExample("ло́дка", "小船", "к 前 д 清化为 [t]"),
+        LetterExample("са́д", "花园", "词尾 д 清化为 [t]")
+    ),
+    'Е' to Letter("е",
+        LetterExample("е́ль", "冷杉", "词首 е 读 [je]"),
+        LetterExample("ме́сто", "地方", "辅音后读 [e]，并使前辅音软化"),
+        LetterExample("весна́", "春天", "非重读 е 常弱化为 [ɪ]"),
+        LetterExample("по́езд", "火车", "元音后 е 保留 [j]，非重读约为 [jɪ]"),
+        LetterExample("объе́кт", "物体；对象", "ъ 后 е 读 [je]")
+    ),
+    'Ё' to Letter("ё",
+        LetterExample("ёлка", "圣诞树；云杉", "词首 ё 读 [jo]，通常自带重音"),
+        LetterExample("мёд", "蜂蜜", "辅音后读 [o]，并使前辅音软化"),
+        LetterExample("подъём", "上升；提升", "ъ 后 ё 读 [jo]"),
+        LetterExample("всё", "一切；全部", "辅音后读 [o]，通常自带重音"),
+        LetterExample("трёх", "三个的（第二格）", "读 [trʲox]，ё 通常自带重音")
+    ),
+    'Ж' to Letter("жэ",
+        LetterExample("жу́к", "甲虫", "[ʐ]，始终硬音"),
+        LetterExample("жена́", "妻子", "[ʐ]，е 后仍不软化"),
+        LetterExample("жи́знь", "生命；生活", "жи 中 и 实际接近 [ɨ]"),
+        LetterExample("но́жка", "小腿；桌腿", "к 前 ж 清化为 [ʂ]"),
+        LetterExample("дожди́", "雨（复数）", "[ʐ]，д 前保持浊音")
+    ),
+    'З' to Letter("зэ",
+        LetterExample("зу́б", "牙齿", "[z]"),
+        LetterExample("зи́ма", "冬天", "[zʲ]，и 前软化"),
+        LetterExample("гла́з", "眼睛", "词尾 з 清化为 [s]"),
+        LetterExample("ска́зка", "童话", "к 前 з 清化为 [s]"),
+        LetterExample("разби́ть", "打碎；击破", "б 前 з 保持 [z]")
+    ),
+    'И' to Letter("и",
+        LetterExample("и́гла", "针", "重读 и [i]"),
+        LetterExample("игра́", "游戏", "词首非重读 и 常读 [ɪ]"),
+        LetterExample("ли́са", "狐狸", "软辅音后读 [i]"),
+        LetterExample("жи́знь", "生命；生活", "ж 后 и 实际接近 [ɨ]"),
+        LetterExample("ци́рк", "马戏团", "ц 后 и 实际接近 [ɨ]")
+    ),
+    'Й' to Letter("и краткое",
+        LetterExample("йо́гурт", "酸奶", "词首 й 读 [j]"),
+        LetterExample("ма́йка", "T 恤", "元音后 й 读 [j]"),
+        LetterExample("кра́й", "边；边缘", "词尾 й 读 [j]"),
+        LetterExample("райо́н", "地区", "元音之间 й 读 [j]")
+    ),
+    'К' to Letter("ка",
+        LetterExample("ко́т", "猫", "[k]"),
+        LetterExample("ки́но", "电影", "[kʲ]，и 前软化"),
+        LetterExample("рука́", "手臂；手", "[k]，硬音"),
+        LetterExample("мя́гкий", "柔软的", "и 前 [kʲ]")
+    ),
+    'Л' to Letter("эль",
+        LetterExample("лу́к", "洋葱；弓", "[l]，硬音"),
+        LetterExample("ли́са", "狐狸", "[lʲ]，и 前软化"),
+        LetterExample("со́ль", "盐", "词尾 ль 读 [lʲ]"),
+        LetterExample("по́лька", "波尔卡舞曲", "ль 读 [lʲ]"),
+        LetterExample("молоко́", "牛奶", "元音之间通常读硬 [l]")
+    ),
+    'М' to Letter("эм",
+        LetterExample("ма́ма", "妈妈", "[m]，硬音"),
+        LetterExample("ми́р", "和平；世界", "[mʲ]，и 前软化"),
+        LetterExample("мя́ч", "球", "я 前 [mʲ]"),
+        LetterExample("се́мь", "七", "词尾 мь 读 [mʲ]")
+    ),
+    'Н' to Letter("эн",
+        LetterExample("но́с", "鼻子", "[n]，硬音"),
+        LetterExample("не́бо", "天空", "[nʲ]，е 前软化"),
+        LetterExample("на́до", "需要；必须", "[n]，硬音"),
+        LetterExample("ко́нь", "马", "词尾 нь 读 [nʲ]")
+    ),
+    'О' to Letter("о",
+        LetterExample("о́зеро", "湖", "重读 о [o]"),
+        LetterExample("вода́", "水", "非重读首个 о 常弱化为 [ɐ]"),
+        LetterExample("молоко́", "牛奶", "多个非重读 о 弱化为 [ɐ]/[ə]"),
+        LetterExample("хорошо́", "好；良好地", "词尾非重读 о 常读 [ə]"),
+        LetterExample("но́вого", "新的（第二格）", "-ого 中非重读 о 常弱化为 [ə]")
+    ),
+    'П' to Letter("пэ",
+        LetterExample("па́па", "爸爸", "[p]，硬音"),
+        LetterExample("пи́ца", "披萨", "[pʲ]，и 前软化"),
+        LetterExample("пя́ть", "五", "[pʲ]，я 前软化"),
+        LetterExample("впра́вду", "真的；确实", "вп 连缀中 п 保持清音 [p]")
+    ),
+    'Р' to Letter("эр",
+        LetterExample("ра́ма", "画框", "[r]，硬音颤音"),
+        LetterExample("река́", "河", "[rʲ]，е 前软化"),
+        LetterExample("три́", "三", "[rʲ]，и 前软化"),
+        LetterExample("две́рь", "门", "词尾 рь 读 [rʲ]"),
+        LetterExample("дво́р", "院子", "词尾响音 р 不清化，仍为 [r]")
+    ),
+    'С' to Letter("эс",
+        LetterExample("са́д", "花园", "[s]，硬音"),
+        LetterExample("се́мь", "七", "[sʲ]，е 前软化"),
+        LetterExample("сда́ть", "交出；上交", "д 前 с 浊化为 [z]"),
+        LetterExample("сбо́р", "集合；收集", "б 前 с 浊化为 [z]"),
+        LetterExample("но́с", "鼻子", "词尾 с 仍为 [s]")
+    ),
+    'Т' to Letter("тэ",
+        LetterExample("то́к", "电流", "[t]，硬音"),
+        LetterExample("те́нь", "影子", "[tʲ]，е 前软化"),
+        LetterExample("отби́ть", "击退；打掉", "б 前 т 浊化为 [d]"),
+        LetterExample("пу́ть", "道路；路径", "词尾 ть 读 [tʲ]")
+    ),
+    'У' to Letter("у",
+        LetterExample("у́тро", "早晨", "重读 у [u]"),
+        LetterExample("у́хо", "耳朵", "词首 у [u]"),
+        LetterExample("рука́", "手臂；手", "非重读 у 常弱化为 [ʊ]"),
+        LetterExample("музы́ка", "音乐", "非重读 у 常弱化为 [ʊ]")
+    ),
+    'Ф' to Letter("эф",
+        LetterExample("фо́то", "照片", "[f]，硬音"),
+        LetterExample("фи́льм", "电影；胶片", "[fʲ]，и 前软化"),
+        LetterExample("фе́я", "仙女", "е 前 ф 常读 [fʲ]"),
+        LetterExample("лю́фт", "间隙；松动", "词尾 ф 读 [f]")
+    ),
+    'Х' to Letter("ха",
+        LetterExample("хо́лод", "寒冷", "[x]，硬音"),
+        LetterExample("хи́трый", "狡猾的", "[xʲ]，и 前软化"),
+        LetterExample("ме́х", "毛皮", "词尾 х [x]"),
+        LetterExample("ти́хий", "安静的", "и 前 х 读 [xʲ]")
+    ),
+    'Ц' to Letter("цэ",
+        LetterExample("цапля́", "苍鹭", "[t͡s]，始终硬音"),
+        LetterExample("це́на", "价格", "[t͡s]，始终硬音"),
+        LetterExample("ци́рк", "马戏团", "[t͡s]；ц 后 и 接近 [ɨ]"),
+        LetterExample("ме́сяц", "月；月份", "词尾 ц 仍为 [t͡s]"),
+        LetterExample("цы́плёнок", "小鸡", "ц 后 ы 读 [ɨ]")
+    ),
+    'Ч' to Letter("че",
+        LetterExample("ча́й", "茶", "[t͡ɕ]，始终软音"),
+        LetterExample("часы́", "钟；手表", "[t͡ɕ]，始终软音"),
+        LetterExample("но́чь", "夜晚", "词尾 чь 仍读 [t͡ɕ]"),
+        LetterExample("что́", "什么", "特殊读法：ч 常读 [ʂ]")
+    ),
+    'Ш' to Letter("ша",
+        LetterExample("ша́пка", "帽子", "[ʂ]，始终硬音"),
+        LetterExample("ши́на", "轮胎", "ши 中 и 实际接近 [ɨ]"),
+        LetterExample("душа́", "灵魂", "[ʂ]，始终硬音"),
+        LetterExample("мы́шь", "老鼠", "词尾 ш 仍为硬音 [ʂ]")
+    ),
+    'Щ' to Letter("ща",
+        LetterExample("щи́", "酸菜汤", "[ɕː]，长而软的嘶音"),
+        LetterExample("щека́", "脸颊", "[ɕː]，长而软"),
+        LetterExample("ово́щи", "蔬菜", "[ɕː]，长而软"),
+        LetterExample("пла́щ", "斗篷；雨披", "词尾 щ 仍读 [ɕː]")
+    ),
+    'Ъ' to Letter("твёрдый знак",
+        LetterExample("объе́кт", "物体；对象", "ъ 无独立音值，使 е 读 [je]"),
+        LetterExample("подъе́зд", "入口；门厅", "ъ 分隔前缀，使 е 读 [je]"),
+        LetterExample("съе́зд", "代表大会；下坡路", "ъ 后 е 读 [je]"),
+        LetterExample("объём", "体积；容量", "ъ 后 ё 读 [jo]")
+    ),
+    'Ы' to Letter("ы",
+        LetterExample("бы́к", "公牛", "[ɨ]，硬音元音"),
+        LetterExample("ры́ба", "鱼", "[ɨ]"),
+        LetterExample("сы́р", "奶酪", "[ɨ]"),
+        LetterExample("мы́сль", "想法；思想", "[ɨ]；后接软音 лʲ"),
+        LetterExample("сы́н", "儿子", "[ɨ]")
+    ),
+    'Ь' to Letter("мягкий знак",
+        LetterExample("ко́нь", "马", "ь 无独立音值，使 н 软化为 [nʲ]"),
+        LetterExample("се́мь", "七", "ь 无独立音值，使 м 软化为 [mʲ]"),
+        LetterExample("па́льто", "外套", "ь 使 л 软化为 [lʲ]"),
+        LetterExample("письмо́", "信；字母", "ь 使 с 软化为 [sʲ]"),
+        LetterExample("вью́га", "暴风雪", "ь 软化 в，并分隔 ю 的 [j]")
+    ),
+    'Э' to Letter("э",
+        LetterExample("э́то", "这；这是", "词首 э 读 [e]，不带 [j]"),
+        LetterExample("э́хо", "回声", "[e]，不使前辅音软化"),
+        LetterExample("поэ́т", "诗人", "元音后 э 仍读 [e]，不带 [j]"),
+        LetterExample("мэ́р", "市长", "借词中重读 э 接近 [ɛ]")
+    ),
+    'Ю' to Letter("ю",
+        LetterExample("ю́г", "南方", "词首 ю 读 [ju]"),
+        LetterExample("лю́ди", "人们", "辅音后 ю 使 л 软化，读 [lʲu]"),
+        LetterExample("тюле́нь", "海豹", "т 后 ю 读 [tʲu]"),
+        LetterExample("сою́з", "联盟；工会", "元音后 ю 读 [ju]"),
+        LetterExample("вью́га", "暴风雪", "ь 后 ю 读 [ju]")
+    ),
+    'Я' to Letter("я",
+        LetterExample("я́блоко", "苹果", "词首 я 读 [ja]"),
+        LetterExample("мя́со", "肉", "辅音后 я 使 м 软化，读 [mʲa]"),
+        LetterExample("стоя́ть", "站立", "元音后 я 读 [ja]"),
+        LetterExample("объясни́ть", "解释", "ъ 后 я 保留 [j]，非重读约为 [ɪ]"),
+        LetterExample("де́сять", "十", "软辅音后 я 读 [a]")
+    )
+)
