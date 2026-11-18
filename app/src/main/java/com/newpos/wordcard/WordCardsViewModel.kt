@@ -12,6 +12,7 @@ import com.newpos.wordcard.data.AnkiCardCandidate
 import com.newpos.wordcard.data.AnkiCardEntity
 import com.newpos.wordcard.data.AnkiDatabase
 import com.newpos.wordcard.llm.LLMChat
+import com.newpos.wordcard.utils.TtsUtils
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -37,9 +38,8 @@ class WordCardsViewModel(application: Application) : AndroidViewModel(applicatio
             翻译时按语义块逐块翻译,相邻语义块之间用一个空格隔开。
             保持输出简短,语法解释不用太细
             示例:
-            输入:Foi para casa e não pensou mais no achado.
-            回复:
-            他 回到了 家，并且 不再 想起 那个发现的东西。
+            输入:Мы здесь живем и работаем.
+            回复:我们 在这里 生活 并且 工作
             
             语法解释:
             1...
@@ -114,6 +114,10 @@ class WordCardsViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun playSentence() {
         playAudio(_currentCard.value?.sentenceAudios.orEmpty())
+    }
+
+    fun playSentenceByTTS() {
+        TtsUtils.speak(_currentCard.value?.sentences?.first().orEmpty(),playbackSpeed)
     }
 
     private fun playAudio(paths: List<String>) {

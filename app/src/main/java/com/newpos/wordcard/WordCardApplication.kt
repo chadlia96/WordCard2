@@ -3,6 +3,8 @@ package com.newpos.wordcard
 import android.app.Application
 import android.util.Log
 import com.newpos.wordcard.data.AnkiDatabase
+import com.newpos.wordcard.utils.TtsUtils
+import java.util.Locale
 import kotlin.concurrent.thread
 
 class WordCardApplication : Application() {
@@ -22,5 +24,6 @@ class WordCardApplication : Application() {
                 Log.e("DatabaseInitialization", "Database initialization failed", error)
             }
         }
+        TtsUtils.init(this,Locale.forLanguageTag("ru"))
     }
 }

@@ -50,6 +50,7 @@ class WordCardsFragment : Fragment() {
         binding.markLearned.setOnClickListener { viewModel.markLearned() }
         binding.word.setOnClickListener { viewModel.playWord() }
         binding.sentences.setOnClickListener { viewModel.playSentence() }
+        binding.sentencesAudio.setOnClickListener { viewModel.playSentenceByTTS() }
         binding.sentences.setOnLongClickListener {
             if (displayedCardId == viewModel.currentCard.value?.id) {
                 viewModel.askLLM(binding.sentences.text.toString(), supplementalText)

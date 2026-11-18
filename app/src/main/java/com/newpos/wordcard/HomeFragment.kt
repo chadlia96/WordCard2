@@ -36,9 +36,7 @@ class HomeFragment : Fragment() {
         detailBehavior = BottomSheetBehavior.from(binding.wordDetail.root)
         binding.wordDetail.mask.setOnClickListener { hideDetail() }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backCallback)
-
         initLettersGrid()
-        TtsUtils.init(requireContext())
     }
 
     private fun initLettersGrid() {
@@ -58,12 +56,12 @@ class HomeFragment : Fragment() {
         val entry = letterWords.getValue(letter)
         with(binding.wordDetail) {
             this.letter.text = "$letter ${letter.lowercaseChar()}"
-            letterSound.setOnClickListener { TtsUtils.speak(requireContext(), entry.name) }
+            letterSound.setOnClickListener { TtsUtils.speak(entry.name) }
             examples.removeAllViews()
             entry.examples.forEach { example ->
                 val row = ItemLetterExampleBinding.inflate(layoutInflater, examples, false)
                 row.word.text = "${example.word}（${example.meaning}）\n${example.sound}"
-                row.wordSound.setOnClickListener { TtsUtils.speak(requireContext(), example.word) }
+                row.wordSound.setOnClickListener { TtsUtils.speak(example.word) }
                 examples.addView(row.root)
             }
             detailScroll.scrollTo(0, 0)

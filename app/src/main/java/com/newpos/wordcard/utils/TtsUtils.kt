@@ -17,7 +17,7 @@ object TtsUtils {
     private var tts: TextToSpeech? = null
     private var initialized = false
     private var languageAvailable = false
-    private var locale = Locale.forLanguageTag("pt-BR")
+    private var locale = Locale.forLanguageTag("ru")
     private var pendingText: String? = null
     private var pendingSpeechRate = 1f
     private var utteranceId: String? = null
@@ -48,7 +48,6 @@ object TtsUtils {
                 })
                 initialized = true
                 applyLocale()
-                pendingText?.let { speak(appContext, it, pendingSpeechRate, onDone) }
             }
         }
         tts = engine
@@ -74,19 +73,11 @@ object TtsUtils {
      * Fragment 的 onDestroyView 中调用 stop()，取消朗读并清理回调。
      */
     fun speak(
-        context: Context,
         text: String,
         speechRate: Float = 1f,
         onDone: (() -> Unit)? = null
     ) {
         if (text.isBlank()) return
-        if (!initialized) {
-            pendingText = text
-            pendingSpeechRate = speechRate
-            this.onDone = onDone
-            init(context)
-            return
-        }
         stop()
         if (!languageAvailable) return
         if (tts?.setSpeechRate(speechRate) == TextToSpeech.ERROR) {
